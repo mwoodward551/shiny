@@ -1,0 +1,12 @@
+name: motility_analysis
+title:
+username:
+account: brentscott93
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1006223
+bundleId: 2385089
+url: https://brentscott93.shinyapps.io/motility_analysis/
+when: 1567615197.2869
+asMultiple: FALSE
+asStatic: FALSE
