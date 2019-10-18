@@ -7,18 +7,18 @@ library(gridExtra)
 library(dygraphs)
 library(shinycssloaders)
 
-#mike rules
-# Define UI for app  ----
-ui <- fluidPage(theme = shinytheme("spacelab"),
 
-  navbarPage("Muscle Biophysics Lab",
+# Define UI for app  ----
+ui <- fluidPage(theme = shinytheme("slate"),
+
+  navbarPage("Muscle Biophysics Lab: Data Analyzer v2.0",
              
     #Unregulated Motility Panel
-    tabPanel("Unregulated Motility",
+    tabPanel("Motility Data",
        sidebarLayout(
         sidebarPanel(
            fileInput(inputId = "file",
-                  label = "Upload motility files (.xls)",
+                  label = "Upload Motility Files (.xls)",
                   multiple = TRUE,
                   accept = ".xls",
                   buttonLabel = "Browse...",
@@ -26,19 +26,24 @@ ui <- fluidPage(theme = shinytheme("spacelab"),
 
            radioButtons(inputId = "myo_type",
                    label = "Myosin Type:",
-                   choiceNames = list("Skeletal", "Cardiac"),
+                   choiceNames = list("Skeletal (4um cutoff)", "Cardiac (1um cutoff)"),
                    choiceValues = list("skeletal", "cardiac"),
                    inline = TRUE),
 
            actionButton(inputId = "action_button",
+                   class="btn btn-info", 
                    label = "Analyze",
                    width = 175),
 
            downloadButton("download_by_video",
-                           "Download 'By Video'"),
+                   class="btn btn-success", 
+                   "Download 'By Video'",
+                   width = 175),
 
            downloadButton("download_summary",
-                         "Download Summary")
+                   class="btn btn-success", 
+                   "Download Summary",
+                   width = 175)
                    ), #sidebar panel
 
 
@@ -52,12 +57,60 @@ ui <- fluidPage(theme = shinytheme("spacelab"),
                  )
              ) #main panel close
          ) #side bar layout close
+     ), #motility tab Panel close
+ 
+ 
+ 
+ 
+ 
+     #unregulated Motility plot Tab
+     tabPanel("Motility Plot",
+              tabPanel("Motility Plot",
+                       sidebarLayout(
+                         sidebarPanel(
+                           fileInput(inputId = "file",
+                                     label = "Upload Summary Motility File (.xls)",
+                                     multiple = TRUE,
+                                     accept = ".xls",
+                                     buttonLabel = "Browse...",
+                                     placeholder = "No files selected")
+                         ), #sidebar panel
+                           mainPanel(
+                             "Plot", plotOutput("motility_plot")
+
+                             
+                           ) #main panel close
+                         ) #sidebar panel close
+                       ) #tab panel layout close
+              ), #motility tab Panel close
+           
+ 
+ 
+ 
+ #regulated Motility plot Tab
+ tabPanel("Regulated Motility Plot",
+          tabPanel("Regulated Motility Plot",
+                   sidebarLayout(
+                     sidebarPanel(
+                       fileInput(inputId = "file",
+                                 label = "Upload Summary Motility File (.xls)",
+                                 multiple = TRUE,
+                                 accept = ".xls",
+                                 buttonLabel = "Browse...",
+                                 placeholder = "No files selected")
+                     ), #sidebar panel
+                     mainPanel(
+                       "Plot", plotOutput("regulated_motility_plot")
+                       
+                       
+                     ) #main panel close
+                   ) #sidebar panel close
+          ) #tab panel layout close
  ), #motility tab Panel close
  
- #Regulated Motility Tab
-  tabPanel("Regulated Motility",
-          print("This is for regulation")
-          ), #reguated tab close
+ 
+ 
+ 
  
   #Mini_ensmble trap Tab
   tabPanel("Mini-Ensemble Trap",
