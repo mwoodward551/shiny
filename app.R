@@ -7,7 +7,7 @@ library(gridExtra)
 library(dygraphs)
 library(shinycssloaders)
 
-
+#mike rules
 # Define UI for app  ----
 ui <- fluidPage(theme = shinytheme("spacelab"),
 
